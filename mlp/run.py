@@ -12,7 +12,7 @@ def parse_args():
     args = sys.argv
     args.sort()
     arg_list = []
-    for i in range(len(allowed_args)):
+    for i in range(len(args)):
         if args[i] == allowed_args[i]:
             arg_list.append(allowed_args[i])
 
