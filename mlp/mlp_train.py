@@ -2,27 +2,13 @@
 import os
 import torch
 import torch.nn.functional as F 
-import matplotlib.pyplot as plt 
 import random 
 import pickle
+from utils import get_unique_chars
 random.seed(42)
 
-def gen_txt(url=''):
-    words = open('names.txt', 'r').read().splitlines()
-    for i in range(len(words)):
-        words[i] = words[i] + '.'
-    chars = get_unique_chars(words)
-    stoi = {s: i for i, s in enumerate(chars)}
-    print(stoi)
-    # itos = {i: s for s, i in stoi.items()}
-
-    return words, stoi
-
-def get_unique_chars(words):
-    chars = sorted(list(set(''.join(words))))
-    return chars
-
 def build_dataset(words, stoi):
+    print('Building dataset...')
     block_size = 3
     X, Y = [], []
     for w in words:
@@ -37,7 +23,8 @@ def build_dataset(words, stoi):
     return X, Y
 
 
-def make_params(vocab_sz=27):
+def make_params(vocab_sz=27, dump=False):
+    print('Initializing weights...')
     g = torch.Generator().manual_seed(214783647)
     C = torch.randn((vocab_sz,10), generator=g) # initial embeddings
     W1 = torch.randn((30,200), generator=g)
@@ -48,10 +35,17 @@ def make_params(vocab_sz=27):
 
     for p in paramaters:
         p.requires_grad = True
+    
+    if dump:
+        with open('init_weights', 'wb') as f:
+            print('Dumping init weights for compare...')
+            pickle.dump(paramaters, f)
 
     return paramaters
 
 def train(Xtr, Ytr, params, itr=100000, lr=0.1, declr=0.01):
+    print('Training...')
+    print('\n"The resistance that you fight physically in the gym and the resistance that you fight in life can only build a strong character." \n  - Arnold Schwarzenegger')
     C, W1, b1, W2, b2 = params
     for i in range(itr):
         # Minibatch creation
@@ -79,10 +73,9 @@ def validate_tr(weights, Xdev, Ydev):
     h = torch.tanh(emb.view(-1, 30) @ W1 + b1)
     logits = h @ W2 + b2
     loss = F.cross_entropy(logits, Ydev)
-    print(loss)
+    print('Validated Loss:', loss.item())
 
-def main():
-    words, stoi = gen_txt()
+def main(words, stoi, w_fname, dump_untrained_w=False):
     random.shuffle(words)
     n1 = int(0.8 * len(words))
     n2 = int(0.9 * len(words))
@@ -90,15 +83,13 @@ def main():
     Xtr, Ytr = build_dataset(words[:n1], stoi)
     Xdev, Ydev = build_dataset(words[n1:n2], stoi)
     # Xte, Yte = build_dataset(words[n2:], stoi)
-    params = make_params(len(get_unique_chars(words)))
-    if os.path.isfile('mlp_weights.pkl'):
-        weights = pickle.load(open('mlp_weights.pkl', 'rb'))    
-    else:
-        weights = train(Xtr, Ytr, params)
+    params = make_params(len(get_unique_chars(words)), dump_untrained_w)
+
+    weights = train(Xtr, Ytr, params)
 
     validate_tr(weights, Xdev, Ydev)
 
-    with open('mlp_weights.pkl', 'wb') as f:
+    with open(w_fname, 'wb') as f:
         pickle.dump(weights, f)
 
 if __name__ == '__main__':
