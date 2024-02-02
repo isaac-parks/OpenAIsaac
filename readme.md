@@ -12,7 +12,7 @@ MLP is a relatively simple architecture. In this project, it consists of an inpu
 
 ### To run the model locally:
 
-1. Pull down the repo, and run `pip install -r requirements.txt` in the root directory. You'll need to be using a version of python that is compatible with Pytorch (like version 3.7).
+1. Pull down the repo, and run `pip install -r requirements.txt` in the mlp directory. You'll need to be using a version of python that is compatible with Pytorch (like version 3.7).
 2. Run `python ./run.py` to train the model and see it generate some predictions. The weights are cached, so subsequent runs won't take as long. You can also run `python ./run.py --compare` to see the untrained predictions compared to the trained predictions, which is kinda neat.
 
 ### A general overview of the training process is as follows:
