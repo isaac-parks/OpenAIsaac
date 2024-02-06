@@ -17,7 +17,7 @@ MLP is a relatively simple architecture. In this project, it consists of an inpu
 
 ### A general overview of the training process is as follows:
 
-- **Data Preparation**: The dataset of raw words is transformed into simple, sequential input tokens, and split into a training, validation, and test set (80% training, 10% val, 10% test) with inputs and labels. Each input is a three-token vector, while the corresponding label is the next token that follows the input vector. The '.' token is used to signify the end of a word.
+- **Data Preparation**: The dataset of raw words is transformed into simple, sequential input tokens, and split into a training, validation, and test set (80% training, 10% val, 10% test) with inputs and labels. Each input is a three-token vector, while the corresponding label is the next token that follows the input vector. The '.' token is used to signify the start and end of a word.
 
 - **Weight Initialization**: The next step is initializing the weights for each layer. There is an Input layer, a single Hidden layer, and the final Output layer. The input layer is a 10-dimensional embedding table (each unique character/token in the dataset is assigned to a 10 dimension embedding). The hidden layer consists of 200 neurons, each receiving 30 features (since there are 3 input tokens each with 10-dimensional embedding). Biases are randomly initialized. The output layer works the same way and outputs logits that have the original shape of the vocab size. Each logit is a raw non-converted probability of what the next token should be.
 
