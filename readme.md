@@ -10,6 +10,10 @@ This directory is (by default) a random name generator (can be used with any dec
 
 MLP is a relatively simple architecture. In this project, it consists of an input layer, a single hidden layer, and an output layer.
 
+#### Here's an example of what the model's output looks like comparing the trained and untrained weights:
+
+![image](/mlp/example.png)
+
 ### To run the model locally:
 
 1. Pull down the repo, and run `pip install -r requirements.txt` in the mlp directory. You'll need to be using a version of python that is compatible with Pytorch (like version 3.7).
