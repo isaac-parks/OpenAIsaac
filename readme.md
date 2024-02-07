@@ -12,7 +12,7 @@ MLP is a relatively simple architecture. In this project, it consists of an inpu
 
 #### Here's an example of what the model's output looks like comparing the trained and untrained weights:
 
-![image](/mlp/example.png)
+![image](/mlp/output.png)
 
 ### To run the model locally:
 
