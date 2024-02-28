@@ -14,6 +14,8 @@ MLP is a relatively simple architecture. In this project, it consists of an inpu
 
 ![image](/mlp/output.png)
 
+#### Here you can see that without training the goofball just spits out a bunch of random letters, but after training, it spits out words that are much more name-like.
+
 ### To run the model locally:
 
 1. Pull down the repo, and run `pip install -r requirements.txt` in the mlp directory. You'll need to be using a version of python that is compatible with Pytorch (like version 3.7).
