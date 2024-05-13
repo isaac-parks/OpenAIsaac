@@ -5,7 +5,6 @@ from mlp_train import main as mlp_train
 from mlp_run import main as mlp_run
 
 def parse_args():
-    # super scuffed rn god i love python
     allowed_args = ['--compare']
     allowed_args.sort()
     sys.argv = sys.argv[1:]
