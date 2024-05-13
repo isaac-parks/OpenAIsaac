@@ -48,7 +48,6 @@ def train(Xtr, Ytr, params, itr=100000, lr=0.1, declr=0.01):
     print('\n"The resistance that you fight physically in the gym and the resistance that you fight in life can only build a strong character." \n  - Arnold Schwarzenegger')
     C, W1, b1, W2, b2 = params
     for i in range(itr):
-        # Minibatch creation
         ix = torch.randint(0, Xtr.shape[0], (32,)) # Creating batch sets to make training faster as to going backwards and forwards on every single word every loop
         # Forward pass
         emb = C[Xtr[ix]]
