@@ -4,7 +4,7 @@ def get_unique_chars(words):
     chars = sorted(list(set(''.join(words))))
     return chars
 
-def write_raw_content(dataset_fname, wordsurl='https://shorturl.at/rtxyZ', truncate=False):
+def write_raw_content(dataset_fname, wordsurl='https://raw.githubusercontent.com/karpathy/makemore/master/names.txt', truncate=False):
     res = r.get(wordsurl)
     with open(dataset_fname, 'wb') as f:
         f.write(res.content)

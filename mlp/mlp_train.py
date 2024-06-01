@@ -49,6 +49,7 @@ def train(Xtr, Ytr, params, itr=100000, lr=0.1, declr=0.01):
     C, W1, b1, W2, b2 = params
     for i in range(itr):
         ix = torch.randint(0, Xtr.shape[0], (32,)) # Creating batch sets to make training faster as to going backwards and forwards on every single word every loop
+
         # Forward pass
         emb = C[Xtr[ix]]
 
@@ -56,11 +57,12 @@ def train(Xtr, Ytr, params, itr=100000, lr=0.1, declr=0.01):
         logits = h @ W2 + b2
 
         loss = F.cross_entropy(logits, Ytr[ix]) 
-        # backward pass
+        # Backward pass
         for p in params:
             p.grad = None
         loss.backward()
-        # update 
+
+        # Update weights
         for p in params:
             _lr = lr if i < itr/2 else declr
             p.data += -_lr * p.grad

@@ -20,7 +20,6 @@ def parse_args():
     }
 
 def main():
-    # args = parse_args()
     compare = parse_args().get('compare')
     ds_fname = 'dataset'
     w_fname = 'weights.pkl'
