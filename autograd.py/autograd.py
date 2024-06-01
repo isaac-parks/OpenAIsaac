@@ -49,16 +49,3 @@ class Value:
 
         _build(self)
         return topo
-
-a = Value(10)
-b = Value(20)
-c = Value(5)
-d = Value(40)
-
-e = a * b
-f = c + d
-g = e + f
-h = g * f
-
-h.backward()
-print(f.grad)
